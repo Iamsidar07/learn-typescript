@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { IProduct } from '../types';
+import { Product } from './components';
 
 function App() {
+  const [products,setProducts] = useState<IProduct[]>([
+    {
+    id:1,
+    title:"Chauua",
+    price:102,
+  },
+    {
+    id:2,
+    title:"Le Chauua",
+    price:122,
+  },
+]);
+
+const handleAddToCart = (id: number) =>{
+  console.log('Clicked',id);
+
+}
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {
+        products.map((product) => <Product product={product} key={product.id} handleAddToCartClick = {handleAddToCart }/>)
+    }
+    </>
   );
 }
 
